@@ -111,9 +111,17 @@ main( void )
       // should be a TWI address match and it wakes the device up from all sleep modes.
       if( ! TWI_statusReg.RxDataInBuf ) {
         if(TWI_Transceiver_Busy()) {
+		#ifdef SM2
           MCUCR = (1<<SE)|(0<<SM2)|(0<<SM1)|(0<<SM0); // Enable sleep with idle mode
+		#else
+		  MCUCR = (1<<SE)|(0<<SM1)|(0<<SM0); // Enable sleep with idle mode
+		#endif
         } else {
+		#ifdef SM2
           MCUCR = (1<<SE)|(0<<SM2)|(1<<SM1)|(0<<SM0); // Enable sleep with power-down mode
+		#else
+		  MCUCR = (1<<SE)|(1<<SM1)|(0<<SM0); // Enable sleep with power-down mode
+		#endif
         }
         SLEEP();
       } else {
