@@ -140,7 +140,7 @@ void TWI_Start_Transceiver_With_Data( unsigned char *msg, unsigned char msgSize 
   TWSCRA = (1<<TWEN)|                           // TWI Interface enabled.
            (1<<TWDIE)|(1<<TWASIE)|(1<<TWSIE);   // Enable TWI Interrupt.
 		   
-  TWSCRB = (1<<TWAA);                           // Prepare to ACK next time the Slave is addressed.
+  TWSCRB = (0<<TWAA);                           // Prepare to ACK next time the Slave is addressed.
   
   TWSSRA = (1<<TWDIF)|(1<<TWASIF);              // Clear TWI Interrupt flags
 #endif
@@ -167,7 +167,7 @@ void TWI_Start_Transceiver( void )
   TWSCRA = (1<<TWEN)|                           // TWI Interface enabled.
            (1<<TWDIE)|(1<<TWASIE)|(1<<TWSIE);   // Enable TWI Interrupt.
 
-  TWSCRB = (1<<TWAA);                           // Prepare to ACK next time the Slave is addressed.
+  TWSCRB = (0<<TWAA);                           // Prepare to ACK next time the Slave is addressed.
 
   TWSSRA = (1<<TWDIF)|(1<<TWASIF);              // Clear TWI Interrupt flags
 #endif
